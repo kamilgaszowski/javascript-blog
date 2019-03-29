@@ -60,6 +60,8 @@ function generateTitleLinks(){
 
   /* remove contents of titleList */
 
+const titleList = document.querySelector(optTitleListSelector).innerHTML = '';
+
   /* for each article */
 
     /* get the article id */
