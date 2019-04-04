@@ -109,7 +109,7 @@ function generateTags(){
 
     const articleTagsSelector = article.querySelector(optArticleTagsSelector);
     articleTagsSelector.innerHTML = '';
-     console.log(articleTagsSelector);
+    console.log(articleTagsSelector);
 
 
     /* [DONE]  make html variable with empty string */
@@ -133,14 +133,15 @@ function generateTags(){
 
       /* [DONE]  add generated code to html variable */
 
-      html = html + linkTags;
+      html = html + linkTags + ' ';
       console.log(html);
 
     }
     /* END LOOP: for each tag */
 
     /* [DONE] insert HTML of all the links into the tags wrapper*/
-    articleTagsSelector.insertAdjacentHTML('afterbegin', html);
+    articleTagsSelector.insertAdjacentHTML('afterbegin', html, );
+    console.log(articleTagsSelector);
 
 
   }
