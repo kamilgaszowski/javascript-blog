@@ -49,7 +49,8 @@ function titleClickHandler(event){
 
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
-  optTitleListSelector = '.titles';
+  optTitleListSelector = '.titles',
+  optArticleTagsSelector = '.post-tags .list';
 let html = ' ';
 function generateTitleLinks(){
 
@@ -87,8 +88,6 @@ function generateTitleLinks(){
   titleList.insertAdjacentHTML('afterbegin', html);
 
   const links = document.querySelectorAll('.titles a');
-
-
   for(let link of links){
     link.addEventListener('click', titleClickHandler);
   }
@@ -96,3 +95,59 @@ function generateTitleLinks(){
 }
 
 generateTitleLinks();
+
+
+function generateTags(){
+  /* find all articles */
+  const articles = document.querySelectorAll(optArticleSelector);
+
+  /* START LOOP: for every article: */
+
+  for(let article of articles){
+
+    /* find tags wrapper */
+
+    const articleTagsSelector = article.querySelectorAll(optArticleTagsSelector);
+    articleTagsSelector.innerHTML = '';
+
+
+    /* make html variable with empty string */
+
+    let html = '';
+
+    /* get tags from data-tags attribute */
+
+    const articleTags = article.getAttribute('data-tags');
+
+    /* split tags into array */
+
+    const articleTagsArray = articleTags.split(' ');
+    /* START LOOP: for each tag */
+
+    for(let tag of articleTagsArray){
+      console.log(tag);
+      /* generate HTML of the link */
+
+      const linkTags = '<li><a href="#tag-' + tag + '">' +  tag + '</a></li>';
+      console.log(linkTags);
+      /* add generated code to html variable */
+
+      html = html + linkTags;
+      console.log(html);
+
+    }
+    /* END LOOP: for each tag */
+
+    /* [DOESN'T WORK] insert HTML of all the links into the tags wrapper */
+    articleTagsSelector.insertAdjacentHTML('afterbegin', html);
+
+    const linksTags = document.querySelectorAll('.post-tags .list a');
+    for(let linkTag of linksTags){
+      linkTag.addEventListener('click', titleClickHandler);
+    }
+  }
+  /* END LOOP: for every article: */
+
+}
+
+generateTags();
