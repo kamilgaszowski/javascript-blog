@@ -50,7 +50,8 @@ function titleClickHandler(event){
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
-  optArticleTagsSelector = '.post-tags .list';
+  optArticleTagsSelector = '.post-tags .list',
+  optArticleAuthorSelector = '.post-author';
 
 let html = ' ';
 
@@ -65,7 +66,7 @@ function generateTitleLinks(customSelector = ''){
   /* [DONE] for each article */
 
   const articles = document.querySelectorAll(optArticleSelector + customSelector);
-  console.log(optArticleSelector, customSelector)
+  console.log(optArticleSelector, customSelector);
   for(let article of articles){
 
     /* [DONE] get the article id */
@@ -194,8 +195,8 @@ function tagClickHandler(event){
 
   /* find all tag links with "href" attribute equal to the "href" constant */
 
-    const hrefTags = document.querySelectorAll('a[href="' + href + '"]');
-    console.log('hrefTags: ', hrefTags);
+  const hrefTags = document.querySelectorAll('a[href="' + href + '"]');
+  console.log('hrefTags: ', hrefTags);
 
   /* START LOOP: for each found tag link */
   for(let hrefTag of hrefTags){
@@ -231,3 +232,53 @@ function addClickListenersToTags(){
 }
 
 addClickListenersToTags();
+
+
+function generateAuthors (){
+
+/* find all articles */
+
+  const articles = document.querySelectorAll(optArticleSelector);
+
+
+/* START LOOP: for every article: */
+
+  for(let article of articles){
+
+    /* find author wrapper */
+
+    const articleAuthorSelector = article.querySelector(optArticleAuthorSelector);
+    articleAuthorSelector.innerHTML = '';
+
+    /* make html variable string */
+
+    let html = 'by ';
+
+    /* get authors from data-author attribute */
+
+    const author = article.getAttribute('data-author');
+    console.log('author: ', author);
+
+ /* generate HTML of the link */
+
+    const authors = '<a href="#author-' + author + '">' + author + '</a>';
+      /* add generated code to html variable */
+
+    html += authors;
+    /* insert HTML into authors wrapper */
+
+    articleAuthorSelector.insertAdjacentHTML('afterbegin', html);
+
+    /* END LOOP: for every article */
+  }
+
+}
+
+generateAuthors();
+
+
+
+
+
+
+
