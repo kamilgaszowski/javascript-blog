@@ -42,6 +42,11 @@ body {
   }
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 /* Layout */
 
 .wrapper {
@@ -83,7 +88,7 @@ body {
   padding: 0;
 
   .active {
-    font-weight: bold;
+    font-size: 18px;
   }
 }
 

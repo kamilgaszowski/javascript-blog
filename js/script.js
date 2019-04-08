@@ -52,11 +52,12 @@ let html = ' ';
 
 function generateTitleLinks(customSelector = ''){
 
+
   /* [DONE] remove contents of titleList */
 
   const titleList = document.querySelector(optTitleListSelector);
   titleList.innerHTML = '';
-  console.log(optArticleSelector + customSelector);
+  console.log(titleList);
 
   /* [DONE] for each article */
 
@@ -140,10 +141,11 @@ function generateTags(){
   /* END LOOP: for every article: */
 
 }
-
 generateTags();
 
 function tagClickHandler(event){
+
+
   /* prevent default action for this event */
 
   event.preventDefault();
@@ -214,12 +216,12 @@ addClickListenersToTags();
 
 function generateAuthors (){
 
-/* find all articles */
+  /* find all articles */
 
   const articles = document.querySelectorAll(optArticleSelector);
 
 
-/* START LOOP: for every article: */
+  /* START LOOP: for every article: */
 
   for(let article of articles){
 
@@ -236,10 +238,10 @@ function generateAuthors (){
 
     const articleAuthor = article.getAttribute('data-author');
 
- /* generate HTML of the link */
+    /* generate HTML of the link */
 
     const articleAuthors = '<a href="#author-' + articleAuthor + '">' + articleAuthor + '</a>';
-      /* add generated code to html variable */
+    /* add generated code to html variable */
 
     html += articleAuthors;
     /* insert HTML into authors wrapper */
@@ -293,6 +295,7 @@ function addClickListenersToAuthors(){
 }
 
 addClickListenersToAuthors();
+
 
 
 
