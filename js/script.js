@@ -48,11 +48,11 @@ const optArticleSelector = '.post',
   optArticleTagsSelector = '.post-tags .list',
   optArticleAuthorSelector = '.post-author';
 
-let html = ' ';
+
 
 function generateTitleLinks(customSelector = ''){
 
-
+  let html = ' ';
   /* [DONE] remove contents of titleList */
 
   const titleList = document.querySelector(optTitleListSelector);
