@@ -113,4 +113,39 @@ a {
 .post-tags p {
   margin: 0 10px 0 0;
 }
+
+.tags {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tags li {
+  display: inline-block;
+  padding: 5px;
+}
+
+.tag-size-1 {
+  font-size: 16px;
+}
+
+.tag-size-2 {
+  font-size: 20px;
+}
+
+.tag-size-3 {
+  font-size: 24px;
+}
+
+.tag-size-4 {
+  font-size: 28px;
+}
+
+.tag-size-5 {
+  font-size: 32px;
+}
+
+.tag-size-6 {
+  font-size: 36px;
+}
 /*# sourceMappingURL=style.css.map */

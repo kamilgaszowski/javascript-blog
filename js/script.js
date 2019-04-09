@@ -29,7 +29,9 @@ const optArticleSelector = '.post',
   optArticleTagsSelector = '.post-tags .list',
   optArticleAuthorSelector = '.post-author',
   optTagsListSelector = '.tags.list',
-  optAuthorsListSelector = '.authors.list';
+  optAuthorsListSelector = '.authors.list',
+  optCloudClassCount = 5,
+  optCloudClassPrefix = 'tag-size-';
 
 
 
@@ -39,8 +41,6 @@ function generateTitleLinks(customSelector = ''){
 
   const titleList = document.querySelector(optTitleListSelector);
   titleList.innerHTML = '';
-  console.log(titleList);
-
   const articles = document.querySelectorAll(optArticleSelector + customSelector);
   for(let article of articles){
 
@@ -62,10 +62,39 @@ function generateTitleLinks(customSelector = ''){
 
 generateTitleLinks();
 
+function calculateTagsParams (tags){
+
+  const params = {max: 0, min: 999999};
+
+
+  for(let tag in tags){
+    console.log(tag + ' is used ' + tags[tag] + 'times');
+
+    if(tags[tag] > params.max){
+      params.max = tags[tag];
+    }
+
+    if(tags[tag] < params.min){
+      params.min = tags[tag];
+    }
+  }
+
+  return params;
+}
+
+function calculateTagClass (count, params){
+
+  const classNumber = Math.floor( ( (count - params.min) / (params.max - params.min) ) * optCloudClassCount + 1 );
+  console.log('classNumber: ', classNumber);
+
+ return optCloudClassPrefix + classNumber;
+}
+
+
 
 function generateTags(){
 
-  let allTags = [];
+  let allTags = {};
   const articles = document.querySelectorAll(optArticleSelector);
 
   for(let article of articles){
@@ -78,19 +107,35 @@ function generateTags(){
       articleTagsArray = articleTags.split(' ');
 
     for(let tag of articleTagsArray){
-      const tags = '<li><a href="#tag-' + tag + '">' +  tag + '</a></li>';
-      html += tags;
+      const linkHTML = '<li><a href="#tag-' + tag + '">' +  tag + '</a></li>';
+      html += linkHTML;
 
-      if(allTags.indexOf(tags) == -1){
-        allTags.push(tags);
+      if(!allTags.hasOwnProperty(tag)){
+        allTags[tag] = 1;
+      } else {
+        allTags[tag]++;
+
       }
     }
 
     articleTagsSelector.insertAdjacentHTML('afterbegin', html);
   }
+
   const tagList = document.querySelector('.tags');
-  tagList.innerHTML = allTags.join('');
+
+  const tagsParams = calculateTagsParams(allTags);
+
+  let allTagsHTML = '';
+
+  for(let tag in allTags){
+
+    allTagsHTML += '<li><a href="#tag-'+ tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) + '">' + tag + '</a></li>';
+  }
+
+  tagList.innerHTML = allTagsHTML;
 }
+
+
 generateTags();
 
 function tagClickHandler(event){
@@ -163,7 +208,7 @@ function authorClickHandler(event){
   const hrefAuthors = document.querySelectorAll('a[href="' + href + '"]');
 
   for(let hrefAuthor of hrefAuthors){
-    console.log(hrefAuthor);
+
     hrefAuthor.classList.add('active');
   }
   generateTitleLinks('[data-author="' + author + '"]');
