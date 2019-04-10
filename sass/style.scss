@@ -131,9 +131,8 @@ a {
 }
 
 
-.tags {
+.tags, .authors {
   list-style-type: none;
-
   margin: 0;
   padding: 0;
 }
@@ -156,7 +155,7 @@ a {
 }
 
 .tag-size-4 {
-  font-size:28px;
+  font-size: 28px;
 }
 
 .tag-size-5 {
@@ -166,5 +165,3 @@ a {
 .tag-size-6 {
   font-size: 36px;
 }
-
-

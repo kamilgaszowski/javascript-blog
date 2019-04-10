@@ -114,7 +114,7 @@ a {
   margin: 0 10px 0 0;
 }
 
-.tags {
+.tags, .authors {
   list-style-type: none;
   margin: 0;
   padding: 0;
